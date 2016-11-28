@@ -1,0 +1,14 @@
+required:
+* GPSD
+* socat
+
+socat TCP-LISTEN:50000,fork TCP:192.168.43.1:50000
+nc localhost 50000
+
+links:
+http://www.cyberciti.biz/faq/linux-unix-tcp-port-forwarding/
+https://blog.retep.org/2012/06/18/getting-gps-to-work-on-a-raspberry-pi/
+http://stackoverflow.com/questions/19246103/socket-errorerrno-99-cannot-assign-requested-address-and-namespace-in-python
+https://pymotw.com/2/socket/tcp.html
+https://groups.google.com/forum/#!topic/google-maps-api/xvDGvIidKQc
+http://stackoverflow.com/questions/12263599/nmea-gps-sentence-to-a-map-location
