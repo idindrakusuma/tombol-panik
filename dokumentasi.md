@@ -1,5 +1,11 @@
 # Tombol Panik
 
+## Tanggal tidak diketahui
+### 1. Fungsikan Smartphone jadi GPS Server
+...
+### 2. Ambil data GPS dari Smartphone lewat skrip python
+...
+
 ## Senin, 28 November 2016
 ### 1. install raspbian cli only
 * keyboard salah layout. terbukti dengan karakter | tergantikan dengan karakter lain di keyboard.
@@ -42,6 +48,47 @@
 
   konfigurasi `/etc/usb_modeswitch.conf` (lihat file `files/usb_modeswitch.conf`)
 
-* test dengan `sudo usb_modeswitch -c /etc/usb_modeswitch.conf`
+* tes dengan `sudo usb_modeswitch -c /etc/usb_modeswitch.conf`
+
+* perangkat sudah muncul di `/dev/ttyUSB0`, `/dev/ttyUSB1`, dan `/dev/ttyUSB2`.
+
+  yang akan digunakan adalah `/dev/ttyUSB0` (coba-coba saja)
 
 * link: `http://www.linuxslaves.com/2015/11/how-to-install-and-configure-huawei-e353-usb-modem-dongle-on-ubuntu.html`
+
+## Rabu, 30 November 2016
+### 1. Kirim SMS lewat skrip python
+* Install gammu (aplikasi kirim SMS)
+
+  `~$ sudo apt install gammu`
+
+* buat konfigurasi gammu
+
+  jalankan `~$ gammu-config`
+
+  ubah isi `.gammurc` yang ada di `home` (lihat `files/.gammurc`)
+
+* buat modul python untuk kirim sms (lihat `send_sms.py`)
+
+  menggunakan gammu cli
+
+* link:
+
+  `http://stackoverflow.com/questions/89228/calling-an-external-command-in-python`
+
+  jika menggunakan python-gammu `https://wammu.eu/python-gammu/`
+
+### 2. Otomatisasi switch mode-nya usb_modeswitch dengan udev rules
+* buat file `/etc/udev/rules.d/41-usb_modeswitch.rules`
+
+  isi dengan: `ATTRS{idVendor}=="12d1", ATTRS{idProduct}=="1446", RUN+="/usr/sbin/usb_modeswitch -c /etc/usb_modeswitch.conf"`
+
+  `12d1` adalah kode vendor usb, `1446` adalah kode product usb. Keduanya bisa dilihat dari `~$ lsusb`
+
+  misalnya dari contoh keluaran berikut: `Bus 001 Device 006: ID 12d1:1446 Huawei Technologies Co., Ltd.`
+
+* link:
+
+  `https://www.raspberrypi.org/forums/viewtopic.php?t=32307`
+
+  `http://askubuntu.com/questions/673618/udev-doesnt-run-bash-script-as-run-argument`

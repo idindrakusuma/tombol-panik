@@ -1,4 +1,6 @@
 import socket
+from send_sms import send_sms
+
 server = socket.socket() 
 server.connect(("192.168.43.1", 50000))
 
@@ -33,4 +35,5 @@ if long_direction is 'W':
     long *= -1
 
 gmaps_url = 'http://maps.google.com/maps?q=' + str(lat) +','+ str(long)
+send_sms('082255805036', 'Tolong aku... \n'+gmaps_url)
 print(gmaps_url)
